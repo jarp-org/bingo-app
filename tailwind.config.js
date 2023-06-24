@@ -1,8 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-	content: ['./src/*/.{html,js,svelte,ts}'],
+	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
-		extend: {}
+		extend: {
+			fontFamily: {
+				accent: ['Belanosima']
+			}
+		}
 	},
-	plugins: []
+	plugins: [require('daisyui')],
+	daisyui: {
+		themes: ['emerald']
+	}
 };
