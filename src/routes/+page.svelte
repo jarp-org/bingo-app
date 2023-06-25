@@ -1,14 +1,9 @@
 <script>
+	export const ssr = false;
 	import { trpc } from '$lib/trpc/client';
 	import ActionButton from '$lib/components/ActionButton.svelte';
 
-	let greeting = 'press the button to load data';
-  	
-
-	const loadData = async () => {
-    greeting = await trpc().greeting.query();
-  };
-
+	let greeting = trpc().greeting.createQuery();
 </script>
 
 <svelte:head>
@@ -22,12 +17,8 @@
 		<div class="divider">Or</div>
 		<ActionButton action="/room/join">Join</ActionButton>
 		<div class="font-accent text-3xl italic">a Room</div>
-		<div><a
-			href="#load"
-			role="button"
-			class="secondary"
-			on:click|preventDefault={loadData}>Load</a
-		  >
-		  <p>{greeting}</p></div>
+		<div>
+			<p>{$greeting.data}</p>
+		</div>
 	</div>
 </section>
