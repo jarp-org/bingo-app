@@ -4,6 +4,15 @@
 	import ActionButton from '$lib/components/ActionButton.svelte';
 
 	let greeting = trpc().greeting.createQuery();
+
+	let data = 'loading...';
+
+	let mut = trpc().mut.createMutation();
+	trpc().sub.createSubscription(undefined, {
+		onData: (n) => {
+			data = n;
+		}
+	});
 </script>
 
 <svelte:head>
@@ -19,6 +28,18 @@
 		<div class="font-accent text-3xl italic">a Room</div>
 		<div>
 			<p>{$greeting.data}</p>
+		</div>
+
+		<div>
+			<h1>this is a realtime thingy</h1>
+			<span>{data}</span>
+			<button
+				on:click={() => {
+					$mut.mutate('yourMomGay');
+				}}
+			>
+				nonsense
+			</button>
 		</div>
 	</div>
 </section>

@@ -1,8 +1,7 @@
 import { createContext } from '$lib/trpc/context';
 import { router } from '$lib/trpc/router';
+import { createTRPCWebSocketServer } from 'trpc-sveltekit/websocket';
 
-import type { Handle } from '@sveltejs/kit';
+import { building } from '$app/environment';
 
-import { createTRPCHandle } from 'trpc-sveltekit';
-
-export const handle: Handle = createTRPCHandle({ router, createContext });
+if (!building) createTRPCWebSocketServer({ router, createContext });
