@@ -9,6 +9,17 @@ interface Player {
 	name: string;
 }
 
+interface Room {
+	code: string;
+	incidents: Incident[];
+	game: Game;
+}
+
+interface Game {
+	players: Player[];
+	phase: string;
+}
+
 interface addIncident {
 	type: 'addIncident';
 	incident: Incident;
